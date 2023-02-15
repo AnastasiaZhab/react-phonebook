@@ -7,15 +7,27 @@ class Form extends Component {
 
   handleChangeInput = (e) => {
     this.setState({name: e.currentTarget.value})
+  };
+
+  formSubmit = (e) => {
+    e.preventDefault();
+
+    this.props.onSubmit(this.state);
+    this.reset();
+  }
+
+  reset = () => {
+    this.setState({name: ''})
   }
 
   render() {
     return (
       <>
-      <form >
+      <form onSubmit={this.formSubmit}>
         <label>Name
           <input
             onChange={this.handleChangeInput}
+            value={this.state.name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
